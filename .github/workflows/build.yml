@@ -32,8 +32,8 @@ jobs:
 
     - name: Rename firmware to match release version
       run: |
-        mv release/firmware.uf2 release/$(FIRMWARE_RELEASE_VER).uf2
+        mv release/firmware.uf2 release/$(echo "$FIRMWARE_RELEASE_VER").uf2
 
     - name: Make a new release on Github
       run: |
-        gh release create $(FIRMWARE_RELEASE_VER) release/*.uf2 -t "Release $(FIRMWARE_RELEASE_VER)\n- Hekate $(cat hekate_ver)\n- Firmware $(cat firmware_ver)\n\nBuilt on $(date)"
+        gh release create $(echo "$FIRMWARE_RELEASE_VER") release/*.uf2 -t "Release $(echo "$FIRMWARE_RELEASE_VER")\n- Hekate $(cat hekate_ver)\n- Firmware $(cat firmware_ver)\n\nBuilt on $(date)"
