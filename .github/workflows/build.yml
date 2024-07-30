@@ -29,9 +29,12 @@ jobs:
         arduino-cli core update-index
         make all
 
-    - name: Rename firmware to match release version
+    - name: Setup environment
       run: |
         echo "FIRMWARE_RELEASE_VER=nx-fusee-loader_$(cat firmware_ver)_Hekate_$(cat hekate_ver)" >> $GITHUB_ENV
+
+    - name: Rename firmware to match release version
+      run: |
         mv release/firmware.uf2 release/$(echo "$FIRMWARE_RELEASE_VER").uf2
 
     - name: Make a new release on Github
