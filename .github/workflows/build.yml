@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      FIRMWARE_RELEASE_VER: nx-fusee-loader_$(cat firmware_ver)_Hekate_$(cat hekate_ver)
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
@@ -32,6 +31,7 @@ jobs:
 
     - name: Rename firmware to match release version
       run: |
+        echo "FIRMWARE_RELEASE_VER=nx-fusee-loader_$(cat firmware_ver)_Hekate_$(cat hekate_ver)" >> $GITHUB_ENV
         mv release/firmware.uf2 release/$(echo "$FIRMWARE_RELEASE_VER").uf2
 
     - name: Make a new release on Github
