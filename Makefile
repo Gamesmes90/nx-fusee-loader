@@ -33,7 +33,7 @@ payload:
 release:
 	mkdir release
 	cp build/firmware.uf2 release/firmware.uf2
-	@echo "uf2 relase finalized!"
+	@echo "uf2 release finalized!"
 
 clean:
 	rm -rf build hekate tmp release
