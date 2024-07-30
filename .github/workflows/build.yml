@@ -1,0 +1,39 @@
+name: Build and release firmware
+on: 
+  push:
+    paths:
+      - 'hekate_ver'
+  workflow_dispatch:
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    env:
+      FIRMWARE_RELEASE_VER: nx-fusee-loader_$(cat firmware_ver)_Hekate_$(cat hekate_ver)
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install arduino-cli and python requests module
+      run: |
+        PATH=$PATH:$PWD/bin
+        curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+        pip install requests
+        
+    - name: Build firmware
+      run: |
+        PATH=$PATH:$PWD/bin
+        arduino-cli config init
+        arduino-cli core update-index
+        make all
+
+    - name: Rename firmware to match release version
+      run: |
+        mv release/firmware.uf2 release/$(FIRMWARE_RELEASE_VER).uf2
+
+    - name: Make a new release on Github
+      run: |
+        gh release create $(FIRMWARE_RELEASE_VER) release/*.uf2 -t "Release $(FIRMWARE_RELEASE_VER)\n- Hekate $(cat hekate_ver)\n- Firmware $(cat firmware_ver)\n\nBuilt on $(date)"
