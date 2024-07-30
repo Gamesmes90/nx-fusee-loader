@@ -39,5 +39,4 @@ jobs:
 
     - name: Make a new release on Github
       run: |
-        git tag $(echo "$FIRMWARE_RELEASE_VER")
-        gh release create $(echo "$FIRMWARE_RELEASE_VER") release/$(echo "$FIRMWARE_RELEASE_VER").uf2 -t "$(echo "$FIRMWARE_RELEASE_VER")" -n "Built Date: $(date)\n- Hekate $(cat hekate_ver)\n- Firmware $(cat firmware_ver)\n- sha256 $(sha256sum release/$(echo "$FIRMWARE_RELEASE_VER").uf2)" --notes-from-tag
+        gh release create $(echo "$FIRMWARE_RELEASE_VER") release/$(echo "$FIRMWARE_RELEASE_VER").uf2 -t "$(echo "$FIRMWARE_RELEASE_VER")" -n "Built Date: $(date)\n- Hekate $(cat hekate_ver)\n- Firmware $(cat firmware_ver)\n- sha256 $(sha256sum release/$(echo "$FIRMWARE_RELEASE_VER").uf2)" --notes-from-tag --target $(echo "$FIRMWARE_RELEASE_VER")
