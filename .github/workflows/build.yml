@@ -36,4 +36,4 @@ jobs:
 
     - name: Make a new release on Github
       run: |
-        gh release create $(echo "$FIRMWARE_RELEASE_VER") release/*.uf2 -t "Release $(echo "$FIRMWARE_RELEASE_VER")\n- Hekate $(cat hekate_ver)\n- Firmware $(cat firmware_ver)\n\nBuilt on $(date)"
+        gh release create $(echo "$FIRMWARE_RELEASE_VER") release/$(echo "$FIRMWARE_RELEASE_VER").uf2 -t "Release $(echo "$FIRMWARE_RELEASE_VER")\n- Hekate $(cat hekate_ver)\n- Firmware $(cat firmware_ver)\n\nBuilt on $(date)"
