@@ -40,5 +40,5 @@ jobs:
 
     - name: Make a new release on Github
       run: |
-        echo -e "## Firmware Information\n\n- Build Date: $(date)\n- Hekate $(cat hekate_ver)\n- Firmware $(cat firmware_ver)\n- sha256 \`$(echo "$SHA256")\`" > release/$(echo "$FIRMWARE_RELEASE_VER").md
-        gh release create $(echo "$FIRMWARE_RELEASE_VER") release/$(echo "$FIRMWARE_RELEASE_VER").uf2 release/$(echo "$FIRMWARE_RELEASE_VER").md CHANGELOG.md -t "$(echo "$FIRMWARE_RELEASE_VER")" -F release/$(echo "$FIRMWARE_RELEASE_VER").md
+        echo -e "## Firmware Information\n\n- Build Date: $(date)\n- Hekate: $(cat hekate_ver)\n- Firmware: $(cat firmware_ver)\n- sha256: \`$(echo "$SHA256")\`" > release/fw_info.md
+        gh release create $(echo "$FIRMWARE_RELEASE_VER") release/$(echo "$FIRMWARE_RELEASE_VER").uf2 release/fw_info.md CHANGELOG.md -t "$(echo "$FIRMWARE_RELEASE_VER")" -F release/fw_info.md
