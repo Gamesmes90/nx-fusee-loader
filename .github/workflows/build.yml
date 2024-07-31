@@ -32,6 +32,7 @@ jobs:
     - name: Setup environment
       run: |
         echo "FIRMWARE_RELEASE_VER=nx-fusee-loader_$(cat firmware_ver)_Hekate_$(cat hekate_ver)" >> $GITHUB_ENV
+        echo "SHA256=$(sha256sum release/firmware.uf2 | cut -d ' ' -f 1)" >> $GITHUB_ENV
 
     - name: Rename firmware to match release version
       run: |
@@ -39,6 +40,4 @@ jobs:
 
     - name: Make a new release on Github
       run: |
-        git tag $(echo "$FIRMWARE_RELEASE_VER")
-        git push origin --tags
-        gh release create $(echo "$FIRMWARE_RELEASE_VER") release/$(echo "$FIRMWARE_RELEASE_VER").uf2 -t "$(echo "$FIRMWARE_RELEASE_VER")" -n "Built Date: $(date)\n- Hekate $(cat hekate_ver)\n- Firmware $(cat firmware_ver)\n- sha256 ```$(sha256sum release/$(echo "$FIRMWARE_RELEASE_VER").uf2)```" --notes-from-tag
+        gh release create $(echo "$FIRMWARE_RELEASE_VER") release/$(echo "$FIRMWARE_RELEASE_VER").uf2 -t "$(echo "$FIRMWARE_RELEASE_VER")" -n "## Firmware Information\n\n- Built Date: $(date)\n- Hekate $(cat hekate_ver)\n- Firmware $(cat firmware_ver)\n- sha256 ```$(echo "$SHA256")```"
