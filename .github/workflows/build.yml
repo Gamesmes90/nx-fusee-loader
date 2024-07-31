@@ -40,4 +40,5 @@ jobs:
 
     - name: Make a new release on Github
       run: |
-        gh release create $(echo "$FIRMWARE_RELEASE_VER") release/$(echo "$FIRMWARE_RELEASE_VER").uf2 -t "$(echo "$FIRMWARE_RELEASE_VER")" -n "## Firmware Information\n\n- Build Date: $(date)\n- Hekate $(cat hekate_ver)\n- Firmware $(cat firmware_ver)\n- sha256 \`$(echo "$SHA256")\`\n\n Refer to [CHANGELOG.md](https://github.com/Gamesmes90/sam-fusee-launcher/blob/master/CHANGELOG.md) for any firmware updates."
+        echo "## Firmware Information\n\n- Build Date: $(date)\n- Hekate $(cat hekate_ver)\n- Firmware $(cat firmware_ver)\n- sha256 \`$(echo "$SHA256")\`" > release/$(echo "$FIRMWARE_RELEASE_VER").md
+        gh release create $(echo "$FIRMWARE_RELEASE_VER") release/$(echo "$FIRMWARE_RELEASE_VER").uf2 release/$(echo "$FIRMWARE_RELEASE_VER").md CHANGELOG.md -t "$(echo "$FIRMWARE_RELEASE_VER")" -F release/$(echo "$FIRMWARE_RELEASE_VER").md
