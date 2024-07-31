@@ -64,8 +64,11 @@ This is the guide to build the required hardware
         - This one is virtually unavailable so it probably needs to be built
 
 ## Wiring
+
 Connect the plus pin of the battery holder to the Bat pin of the board
+
 Connect the minus pin of the battery holder to the Gnd pin of the board
+
 ### Visual
 ![visual](images/visual.png)
 ### Schema
@@ -113,7 +116,7 @@ For a fast and easy build, use [make](#using-make) (Requires a bash environment)
 For a graphical approach, use [Arduino IDE](#with-arduino-ide)
 
 
-## Download and setup the payload
+### Download and setup the payload
 This step will be mentioned in various points of this guide
 * Run [hekateDownloader.py](tools/hekateDownloader.py) script to download the latest Hekate
 * Run [binConverter.py](tools/binConverter.py) script with the Hekate binary
