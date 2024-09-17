@@ -20,7 +20,7 @@ jobs:
         id: git-check
         run: echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
       - name: Commit latest release version
-        if: steps.git-check.outputs.modified == 'true'
+        if: ${{ steps.git-check.outputs.modified == 'true' && $(cat hekate_ver) != 'null' }}
         run: |
           echo "new hekate version detected: $(cat hekate_ver)"
           git config --global user.name 'github-actions[bot]'
