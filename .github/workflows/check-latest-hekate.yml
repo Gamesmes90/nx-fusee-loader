@@ -17,7 +17,7 @@ jobs:
         run: |
           curl -sL https://api.github.com/repos/CTCaer/hekate/releases/latest | \
           jq -r ".tag_name" > hekate_ver
-          echo ::set-output name=ver::$($(cat hekate_ver))
+          echo ::set-output name=ver::$(cat hekate_ver)
       - name: Check for modified files
         id: git-check
         run: echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
