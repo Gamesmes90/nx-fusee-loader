@@ -20,7 +20,7 @@ jobs:
       run: |
         PATH=$PATH:$PWD/bin
         curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
-        pip install requests
+        sudo apt install python3-requests
         
     - name: Build firmware
       run: |
